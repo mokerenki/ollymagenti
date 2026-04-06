@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Database files
+*.db
+*.db-journal
+vectordb/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+temp/
+*.tmp
+*.part
+
+# Backup files
+*.zip
+*.backup
+
+# Ollama models (too large, user downloads separately)
+# Note: Users will pull models themselves via ollama pull
+
+# Build outputs
+dist/
+build/
