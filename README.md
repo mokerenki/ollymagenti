@@ -39,7 +39,69 @@ ollama pull llama3.2:3b
 # Pull the embedding model (for document search)
 ollama pull nomic-embed-text
 
+# Architecture
+
+## Layer 1: Chat + Persistence
+*   Streaming chat with `Ollama API`
+*   `SQLite` for conversation history
+*   Auto-naming of conversations
+
+## Layer 2: Knowledge Base (RAG)
+*   Document upload (PDF, DOCX, TXT)
+*   Smart chunking with paragraph preservation
+*   `nomic-embed-text` for embeddings
+*   `LanceDB` for vector storage
+*   Source-attributed answers
+
+## Layer 3: Workflow Integration
+*   Folder watcher (auto-index)
+*   URL indexing with `Readability`
+*   Settings management
+*   Offline status indicator
+*   Backup & restore
+
 # Start the application
 node server/index.js
+
+
 # In another terminal:
 npx vite client --port 5173
+
+
+# Tech Stack
+
+| Category        | Technologies                                       |
+| :-------------- | :------------------------------------------------- |
+| **Backend**     | Node.js, Express, SQLite                           |
+| **Frontend**    | React, Vite                                        |
+| **AI**          | Ollama (Llama, Mistral, Gemma, nomic-embed-text) |
+| **Vector DB**   | LanceDB                                            |
+| **File Watching** | Chokidar                                           |
+| **Document Parsing** | pdf-parse, mammoth                                 |
+| **URL Extraction** | @mozilla/readability                               |
+
+
+#Project structure
+
+ollymagenti/
+├── server/
+│   ├── index.js          # Express server, API endpoints
+│   ├── database.js       # SQLite operations
+│   ├── vectorDb.js       # LanceDB vector storage
+│   ├── chunker.js        # Document chunking
+│   ├── embedding.js      # Ollama embedding service
+│   ├── documentQueue.js  # Background processing
+│   ├── folderWatcher.js  # Chokidar file watching
+│   └── urlIndexer.js     # Web page extraction
+├── client/
+│   ├── src/
+│   │   ├── Chat.jsx      # Main chat interface
+│   │   ├── DocumentManager.jsx
+│   │   ├── Settings.jsx
+│   │   └── index.css     # Global styles
+│   └── index.html
+├── start-ollymagenti.bat # One-click launcher (Windows)
+└── stop-ollymagenti.bat
+
+##Contributing
+### Issues and pull requests are welcome!
